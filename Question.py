@@ -1,4 +1,4 @@
 class Question:
-    def __int__(self, prompt, answer):
-        self.prompt = prompt
+    def __int__(self, prompts, answer):
+        self.prompts = prompts
         self.answer = answer
