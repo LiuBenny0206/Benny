@@ -1,0 +1,26 @@
+def readfile():
+    fileName = input("Enter the file name: ")
+    inputfile = open(fileName, 'r')
+    listNumber =[]
+    for line in inputfile:
+        listNumber.append(int(line))
+    return listNumber
+
+file = readfile()
+for i in range(len(file)-1): ### Order the number from small to big
+    for j in range(len(file)-1):
+        if file[j] > file[j+1]:
+            file[j], file[j+1] = file[j+1], file[j]
+print("Number  Frequency")
+def frequency(file):
+    freq = {} # Creating a dic, it can record number and count
+    for count in file:
+        if count in freq:
+            freq[count] += 1 #if a number shows up again plus 1
+        else:
+            freq[count] = 1 # else just set 1
+
+    for num, freqNum in freq.items():
+        print ("% d     % d"%(num, freqNum))
+
+frequency(file)
