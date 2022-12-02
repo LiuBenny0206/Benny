@@ -1,0 +1,28 @@
+def getDate(input):
+###############################################################
+# Precondition: To type in the file name that you want to open#
+# Postcondition: To open a file and list successfully         #
+###############################################################
+    infile = open(input, 'r')
+    infile1 = infile.read().split()
+    return infile1
+def printResults(name,grosspay):
+    ########################################################################################################################
+    # Precondition: This function requires name, hours, payrate, grosspay                                                  #
+    # Postcondition: It will print all of calculated data                                                                  #
+    ########################################################################################################################
+        print(name,"$",grosspay)
+
+
+inputList = getDate('employeeList.text')
+i = 0
+e = Employee
+grossPay = []
+for line in range(len(inputList)//3):
+
+    e.getName = inputList[i]
+    e.getHours = inputList[i+1]
+    e.getPayrate = inputList [i+2]
+    e = Employee( inputList[i], int(inputList[i+1]), int(inputList[i+2]))
+    printResults(inputList[i], e.Calculategrosspay())
+    i += 3
