@@ -1,0 +1,102 @@
+from random import randint
+
+class Die(object):
+    def __init__(self):
+        self.value = 1
+
+    def roll(self):
+        self.value = randint(1, 6)
+
+    def getDiceValue(self):
+
+        return self.value
+    def __str__(self):
+
+        return str(self.value)
+class Player(object):
+
+    def __init__(self):
+        self.dice1 = Die()
+        self.dice2 = Die()
+        self.rolls = []
+    def __str__(self):
+        for (v1, v2) in self.rolls:
+            result = str((v1, v2)) + " " + str((v1 + v2))
+            return result
+    def getNumOfRolls(self):
+        return len(self.rolls)
+    def play (self):
+        self.rolls = []
+        self.dice1.roll()
+        self.dice2.roll()
+        (v1, v2) = (self.dice1.getDiceValue(), self.dice2.getDiceValue())
+        self.rolls.append((v1,v2))
+        firstSum = (v1 + v2)
+        if firstSum in (2, 3, 12):
+            return False
+        elif firstSum in (7, 11):
+            return  True
+        while True:
+            self.dice1.roll()
+            self.dice2.roll()
+            (v1, v2) = (self.dice1.getDiceValue(), self.dice2.getDiceValue())
+            self.rolls.append((v1,v2))
+            secondSum = (v1 +v2)
+            if secondSum == 7:
+                return False
+            elif secondSum == firstSum:
+                return True
+
+def playOneGame():
+    player = Player()
+    youWin = player.play()
+    print(player)
+    if youWin:
+        print("You win!")
+    else:
+        print("You lose!")
+
+
+
+def playManyGames(number):
+    wins = 0
+    lossees = 0
+    winRolls = 0
+    lossRolls = 0
+    player = Player()
+    for count in range(number):
+        hasWon = player.play()
+        rolls = player.getNumOfRolls()
+        if hasWon:
+            wins += 1
+            winRolls += rolls
+        else:
+            lossees += 1
+            lossRolls += rolls
+    print("The total number of win is", wins)
+    print("The total number of losses is", lossees)
+    print("The nuber of rolls per win is %0.2f" % (winRolls/ wins))
+    print("The nuber of rolls per lose is %0.2f" % (lossRolls/lossees))
+    print("The winning percentage is %0.3f" % (wins/ number))
+    print(player.getNumOfRolls())
+
+
+
+def main():
+    numner = int(input("Enter the number of games: "))
+    playManyGames(numner)
+
+if __name__== "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
